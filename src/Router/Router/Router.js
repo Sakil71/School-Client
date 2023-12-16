@@ -5,6 +5,7 @@ import Login from "../../Pages/Login/Login/Login";
 import Register from "../../Pages/Login/Register/Register";
 import Profile from "../../Pages/Profile/Profile/Profile";
 import EditProfile from "../../Pages/Profile/EditProfile/EditProfile";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -25,11 +26,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'profile',
-                element: <Profile></Profile>
+                element: <PrivateRoutes><Profile></Profile></PrivateRoutes>
             },
             {
                 path: 'edit-profile',
-                element: <EditProfile></EditProfile>
+                element: <PrivateRoutes><EditProfile></EditProfile></PrivateRoutes>
             },
         ]
     }

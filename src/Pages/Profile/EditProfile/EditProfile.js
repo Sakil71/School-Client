@@ -39,7 +39,7 @@ const EditProfile = () => {
     }
 
     return (
-        <div className='w-1/2 mx-auto mt-10 border border-primary shadow-xl rounded p-10 bg-indigo-950'>
+        <div className='md:w-1/2 mx-auto mt-10 border border-primary shadow-xl rounded p-10 bg-indigo-950'>
             <h1 className='text-2xl mb-4'>Update Your Infromation</h1>
             <form onSubmit={handleSubmit(handleFormData)} className='flex flex-col gap-4'>
                 <input type='name' defaultValue={user?.displayName} {...register("name", { required: true })} className="input input-bordered input-primary w-full" />

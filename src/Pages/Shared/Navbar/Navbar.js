@@ -1,11 +1,20 @@
-import React, { useContext } from 'react';
-import { IoMdNotifications } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { IoMdCloseCircle, IoMdNotifications } from "react-icons/io";
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import { format } from 'date-fns';
+import { TiThMenuOutline } from "react-icons/ti";
 
 const Navbar = () => {
     const { user } = useContext(AuthContext);
+    const [open, setOpen] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleOpen = () =>{
+        setOpen(!open);
+        navigate('/profile');
+    }
 
     return (
         <div className="navbar bg-base-100 sticky top-0 z-30">
@@ -65,7 +74,17 @@ const Navbar = () => {
                 </button>
                 {
                     user &&
-                    <Link to='/profile' className="btn btn-sm">{user?.displayName?.split(' ')[0]}</Link>
+                    <>
+                        <Link to='/profile' className="btn btn-sm mr-4">{user?.displayName?.split(' ')[0]}</Link>
+                        <label onClick={handleOpen} htmlFor="profile-drawer" className="text-2xl drawer-button lg:hidden cursor-pointer">
+                            {
+                                open ?
+                                    <IoMdCloseCircle className='text-rose-500'></IoMdCloseCircle>
+                                    :
+                                    <TiThMenuOutline></TiThMenuOutline>
+                            }
+                        </label>
+                    </>
                 }
             </div>
         </div>
