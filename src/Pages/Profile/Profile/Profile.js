@@ -65,7 +65,8 @@ const Profile = () => {
                         }
                     </button>
 
-                    <Link to='/edit-profile' className="btn btn-primary">Edit Your Profile</Link>
+                    <Link to='/edit-profile' className="btn btn-primary mb-4">Edit Your Profile</Link>
+                    <Link to='/application' className="btn btn-primary mb-4">Your Application</Link>
 
                     <div className='my-5'>
                         <button onClick={handleLOgout} className='text-xs hover:text-black text-white bg-red-700 font-bold hover:bg-rose-700 w-full btn'>Logout</button>
