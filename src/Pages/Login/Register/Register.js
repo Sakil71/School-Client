@@ -38,6 +38,22 @@ const Register = () => {
                         setLoading(false);
                         navigate(from, { replace: true });
                         toast.success('Registration Successfull');
+
+                        const user = {
+                            name : data.name,
+                            email : data.email,
+                            photo : imgData.data.url
+                        }
+
+                        fetch('https://school-server-pink.vercel.app/users', {
+                            method : 'POST',
+                            headers : {'content-type' : 'application/json'},
+                            body: JSON.stringify(user)
+                        })
+                        .then(res => res.json())
+                        .then(userData =>{
+                            console.log(userData);
+                        })
                     })
             })
             .catch(error => {

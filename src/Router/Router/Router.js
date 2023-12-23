@@ -15,6 +15,9 @@ import Apply from "../../Pages/Apply/Apply";
 import TotalApply from "../../DashBoard/TotalApply/TotalApply";
 import ApplyDetails from "../../DashBoard/TotalApply/ApplyDetails";
 import Application from "../../Pages/Profile/Application/Application";
+import TeacherDetails from "../../DashBoard/AllTeacher/TeacherDetails";
+import AdminRoutes from "../AdminRoutes/AdminRoutes";
+import Users from "../../DashBoard/Users/Users";
 
 export const router = createBrowserRouter([
     {
@@ -65,24 +68,33 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/teacher-list',
-                element: <AllTeacher></AllTeacher>
+                element: <AdminRoutes><AllTeacher></AllTeacher></AdminRoutes>
             },
             {
                 path: '/dashboard/student-list',
-                element: <AllStudents></AllStudents>
+                element: <AdminRoutes><AllStudents></AllStudents></AdminRoutes>
+            },
+            {
+                path: '/dashboard/users-list',
+                element: <AdminRoutes><Users></Users></AdminRoutes>
             },
             {
                 path: '/dashboard/add-teacher',
-                element: <AddTeacher></AddTeacher>
+                element: <AdminRoutes><AddTeacher></AddTeacher></AdminRoutes>
             },
             {
                 path: '/dashboard/total-apply',
-                element: <TotalApply></TotalApply>
+                element: <AdminRoutes><TotalApply></TotalApply></AdminRoutes>
             },
             {
                 path: '/dashboard/apply-details/:id',
-                loader : ({params})=> fetch(`https://school-server-smoky.vercel.app/apply-details/${params.id}`),
-                element: <ApplyDetails></ApplyDetails>
+                loader : ({params})=> fetch(`https://school-server-pink.vercel.app/apply-details/${params.id}`),
+                element: <AdminRoutes><ApplyDetails></ApplyDetails></AdminRoutes>
+            },
+            {
+                path: '/dashboard/teacher-details/:id',
+                loader : ({params})=> fetch(`https://school-server-pink.vercel.app/teacher/${params.id}`),
+                element: <AdminRoutes><TeacherDetails></TeacherDetails></AdminRoutes>
             },
         ]
     }

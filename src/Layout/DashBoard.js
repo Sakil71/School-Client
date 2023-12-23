@@ -33,6 +33,7 @@ const DashBoard = () => {
                         <Link to='/dashboard/academic-info' className="btn btn-primary mb-4">Academic Information</Link>
                         <Link to='/dashboard/teacher-list' className="btn btn-primary mb-4">Teachers List</Link>
                         <Link to='/dashboard/student-list' className="btn btn-primary mb-4">Students List</Link>
+                        <Link to='/dashboard/users-list' className="btn btn-primary mb-4">Users List</Link>
                         <Link to='/dashboard/total-apply' className="btn btn-primary mb-4">Total Application</Link>
                         <Link to='/dashboard/add-teacher' className="btn btn-primary mb-4">Add Teacher</Link>
                     </ul>

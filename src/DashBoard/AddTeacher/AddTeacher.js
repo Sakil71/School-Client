@@ -1,12 +1,52 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddTeacher = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [loader, setLoader] = useState(false);
     const [addError, setAddError] = useState('');
 
+    const navigate = useNavigate();
+
     const handleFormData = data => {
+        const image = data.photo[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        setLoader(true);
+
+        fetch(`https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_ImgBbKey}`, {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                if (imgData.success) {
+                    const teacher = {
+                        name : data.name,
+                        email : data.email,
+                        group : data.group,
+                        subject : data.subject,
+                        qualification : data.qualification,
+                        age : data.age,
+                        photo : imgData.data.url
+                    }
+                    fetch(`https://school-server-pink.vercel.app/teacher`, {
+                        method: 'POST',
+                        headers: { 'content-type': 'application/json' },
+                        body: JSON.stringify(teacher)
+                    })
+                    .then(res => res.json())
+                    .then(teacherData =>{
+                        if(teacherData.acknowledged){
+                            toast.success(`${data.name} - successfully addeded`);
+                            setLoader(false);
+                            navigate('/dashboard/teacher-list');
+                        }
+                    })
+                }
+            })
 
     }
 
@@ -19,7 +59,7 @@ const AddTeacher = () => {
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div>
                         <small>Name:</small>
-                        <input type='name' placeholder='Name' {...register("name", { required: true })} className="input input-bordered input-primary w-full" />
+                        <input type='text' placeholder='Name' {...register("name", { required: true })} className="input input-bordered input-primary w-full" />
                         {errors.name && <span className='text-red-400 font-bold'>Name is required</span>}
                     </div>
 
@@ -32,7 +72,7 @@ const AddTeacher = () => {
 
                     <div>
                         <small>Group:</small>
-                        <select type='group' {...register("group", { required: true })} className="select select-primary w-full font-bold">
+                        <select type='text' {...register("group", { required: true })} className="select select-primary w-full font-bold">
                             <option className='font-bold' selected value="Science">Science</option>
                             <option className='font-bold' value="Humanities">Humanities</option>
                             <option className='font-bold' value="Business">Business</option>
@@ -41,14 +81,29 @@ const AddTeacher = () => {
                     </div>
 
                     <div>
+                        <small>Subject:</small>
+                        <select type='text' {...register("subject", { required: true })} className="select select-primary w-full font-bold">
+                            <option className='font-bold' selected value="Bangla">Bangla</option>
+                            <option className='font-bold' value="English">English</option>
+                            <option className='font-bold' value="Mathmatichs">Mathmatichs</option>
+                            <option className='font-bold' value="ICT">ICT</option>
+                            <option className='font-bold' value="Bangladesh Studies">Bangladesh Studies</option>
+                            <option className='font-bold' value="Higher Math">Higher Math</option>
+                            <option className='font-bold' value="History">History</option>
+                            <option className='font-bold' value="Agriculture Education ">Agriculture Education</option>
+                        </select>
+                        {errors.subject && <span className='text-red-400 font-bold'>Subject is required</span>}
+                    </div>
+
+                    <div>
                         <small>Qualification:</small>
-                        <input type='qualification' placeholder='Qualification' {...register("qualification", { required: true })} className="input input-bordered input-primary w-full" />
+                        <input type='text' placeholder='Qualification' {...register("qualification", { required: true })} className="input input-bordered input-primary w-full" />
                         {errors.qualification && <span className='text-red-400 font-bold'>Qualification is required</span>}
                     </div>
 
                     <div>
                         <small>Teacher Age:</small>
-                        <select type='age' {...register("age", { required: true })} className="select select-primary w-full font-bold">
+                        <select type='text' {...register("age", { required: true })} className="select select-primary w-full font-bold">
                             <option selected className='font-bold' value="22">22</option>
                             <option className='font-bold' value="23">23</option>
                             <option className='font-bold' value="24">24</option>

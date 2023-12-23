@@ -49,7 +49,7 @@ const Apply = () => {
                         thana: data.thana,
                         district: data.district,
                     }
-                    fetch('https://school-server-smoky.vercel.app/apply', {
+                    fetch('https://school-server-pink.vercel.app/apply', {
                         method: 'POST',
                         headers: { 'content-type': 'application/json' },
                         body: JSON.stringify(apply)
@@ -60,7 +60,7 @@ const Apply = () => {
                             reset();
                             setLoader(false);
                             toast.success(`${data.name} - Thank you for apply`);
-                            navigate('/');
+                            navigate('/application');
                         }
                     })
                 }
