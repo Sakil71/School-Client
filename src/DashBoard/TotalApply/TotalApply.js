@@ -34,13 +34,25 @@ const TotalApply = () => {
         })
     }
 
+    const handleConfirm = (apply) =>{
+        fetch(`https://school-server-pink.vercel.app/apply/confirm/${apply._id}`, {
+            method : 'PATCH'
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.acknowledged){
+                toast.success(`${apply?.name} - applicaton confirmed`);
+            }
+        })
+    }
+
     return (
         <div className='w-full'>
             <h1 className='text-center font-medium text-2xl mb-5 opacity-80'>Total {applyData.length > 1 ? 'Applications' : 'Application'} : {applyData.length}</h1>
 
             <div>
                 {
-                    applyData.map((apply, i) => <div key={apply._id} className='flex items-center justify-between gap-4 my-4'>
+                    applyData.map((apply, i) => <div key={apply._id} className={`${apply?.confirm && 'opacity-50'} flex items-center justify-between gap-4 my-4`}>
                         <div className='flex items-center gap-4'>
                             <h1 className='text-2xl font-bold'>{i + 1}.</h1>
                             <div>
@@ -58,8 +70,8 @@ const TotalApply = () => {
                         </div>
 
                         <div>
-                            <button className='btn btn-sm text-xs btn-success mr-4'>Confirm</button>
-                            <button onClick={() => handleDelete(apply)} className='btn btn-sm text-xs btn-error'>Delete</button>
+                            <button onClick={()=> handleConfirm(apply)} disabled={apply?.confirm} className='btn btn-sm text-xs btn-success mr-4'>Confirm</button>
+                            <button onClick={() => handleDelete(apply)} disabled={apply?.confirm} className='btn btn-sm text-xs btn-error'>Delete</button>
                         </div>
                     </div>)
                 }

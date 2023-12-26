@@ -41,7 +41,7 @@ const Profile = () => {
                     <div className="pdf-profile hero-content flex-col lg:flex-row">
                         <PhotoProvider>
                             <PhotoView src={user?.photoURL}>
-                                <img src={user?.photoURL} className="h-96 rounded-lg shadow-2xl cursor-pointer" alt='' />
+                                <img src={user?.photoURL} className="h-96 w-96 rounded-lg shadow-2xl cursor-pointer" alt='' />
                             </PhotoView>
                         </PhotoProvider>
                         <div>

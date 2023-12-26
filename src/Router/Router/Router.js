@@ -18,6 +18,8 @@ import Application from "../../Pages/Profile/Application/Application";
 import TeacherDetails from "../../DashBoard/AllTeacher/TeacherDetails";
 import AdminRoutes from "../AdminRoutes/AdminRoutes";
 import Users from "../../DashBoard/Users/Users";
+import AddNotice from "../../DashBoard/AddNotice/AddNotice";
+import Notices from "../../DashBoard/AddNotice/Notices";
 
 export const router = createBrowserRouter([
     {
@@ -67,6 +69,11 @@ export const router = createBrowserRouter([
                 element: <AcademicInfo></AcademicInfo>
             },
             {
+                path : '/dashboard/notices',
+                loader : ()=> fetch('https://school-server-pink.vercel.app/notices'),
+                element: <Notices></Notices>
+            },
+            {
                 path: '/dashboard/teacher-list',
                 element: <AdminRoutes><AllTeacher></AllTeacher></AdminRoutes>
             },
@@ -96,6 +103,10 @@ export const router = createBrowserRouter([
                 loader : ({params})=> fetch(`https://school-server-pink.vercel.app/teacher/${params.id}`),
                 element: <AdminRoutes><TeacherDetails></TeacherDetails></AdminRoutes>
             },
+            {
+                path : '/dashboard/add-notice',
+                element : <AdminRoutes><AddNotice></AddNotice></AdminRoutes>
+            }
         ]
     }
 ])

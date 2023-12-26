@@ -17,7 +17,13 @@ const ApplyDetails = () => {
                         </PhotoProvider>
                     </div>
                     <div>
-                        <h1 className='text-4xl font-bold'>{details.name}</h1>
+                        <h1 className='text-4xl font-bold flex items-center gap-5 mb-4'>
+                            {details.name}
+                            {
+                                details?.confirm &&
+                                <small className='btn btn-primary btn-xs opacity-60'>{details?.confirm}</small>
+                            }
+                        </h1>
                         <p className='text-lg font-bold'>Email:                    {details.email}</p>
                         <p className='text-lg font-bold'>Class:                     {details.admissionClass}</p>
 

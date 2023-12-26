@@ -69,7 +69,7 @@ const Users = () => {
                         <div>
                             <div className='flex gap-4'>
                                 <h1 className='text-xl font-medium'>{user?.name}</h1>
-                                <small className='btn btn-xs text-primary text-xs'>Admin</small>
+                                <small className='btn btn-xs text-primary text-xs'>{user?.role}</small>
                             </div>
                             <p>{user?.email}</p>
                         </div>

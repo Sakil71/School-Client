@@ -10,7 +10,6 @@ const Navbar = () => {
     const [open, setOpen] = useState(false);
 
     const navigate = useNavigate();
-
     const handleOpen = () =>{
         setOpen(!open);
         navigate('/profile');
@@ -68,16 +67,20 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <span className='hidden md:block'>{format(new Date(), 'PP')}</span>
-                <button className="btn btn-ghost btn-circle mx-5">
+
+                <Link to='/dashboard/notices' title='Notices' className="btn btn-ghost btn-circle mx-5">
                     <div className="indicator">
                         <IoMdNotifications className='text-2xl'></IoMdNotifications>
                         <span className="badge badge-xs badge-primary indicator-item"></span>
                     </div>
-                </button>
+                </Link>
+
                 {
                     user &&
                     <>
-                        <Link to='/profile' className="btn btn-sm mr-4">{user?.displayName?.split(' ')[0]}</Link>
+                        <Link to='/profile' className="btn btn-sm mr-4">
+                            {user?.displayName?.split(' ')[0]}
+                        </Link>
                         <label onClick={handleOpen} htmlFor="profile-drawer" className="text-2xl drawer-button lg:hidden cursor-pointer">
                             {
                                 open ?

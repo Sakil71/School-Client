@@ -76,7 +76,7 @@ const Register = () => {
         <div className='md:w-1/2 mx-auto mt-10 border border-primary shadow-xl rounded p-10 bg-indigo-950'>
             <h1 className='text-2xl mb-4'>Register Now</h1>
             <form onSubmit={handleSubmit(handleFormData)} className='flex flex-col gap-4'>
-                <input type='name' placeholder='Name' {...register("name", { required: true })} className="input input-bordered input-primary w-full" />
+                <input type='text' placeholder='Name' {...register("name", { required: true })} className="input input-bordered input-primary w-full" />
                 {errors.name && <span className='text-red-400 font-bold'>Name is required</span>}
 
                 <input type='email' placeholder='Email' {...register("email", { required: true })} className="input input-bordered input-primary w-full" />
