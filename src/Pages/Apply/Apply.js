@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 
 const Apply = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -36,6 +37,7 @@ const Apply = () => {
             .then(imgData => {
                 if (imgData.success) {
                     const apply = {
+                        date : format(new Date(), "Pp"),
                         name: data.name,
                         email: user.email,
                         fatherName: data.fatherName,

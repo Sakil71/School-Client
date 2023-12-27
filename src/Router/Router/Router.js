@@ -70,7 +70,6 @@ export const router = createBrowserRouter([
             },
             {
                 path : '/dashboard/notices',
-                loader : ()=> fetch('https://school-server-pink.vercel.app/notices'),
                 element: <Notices></Notices>
             },
             {
@@ -78,7 +77,8 @@ export const router = createBrowserRouter([
                 element: <AdminRoutes><AllTeacher></AllTeacher></AdminRoutes>
             },
             {
-                path: '/dashboard/student-list',
+                path: '/dashboard/student-list/:admissionClass',
+                loader : ({params})=> fetch(`https://school-server-pink.vercel.app/students/${params.admissionClass}`),
                 element: <AdminRoutes><AllStudents></AllStudents></AdminRoutes>
             },
             {

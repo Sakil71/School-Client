@@ -2,14 +2,13 @@ import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
-import Loading from '../../Components/Loading';
 import icons from '../../../assets/svg-image/undraw_voice_interface_re_206s.svg';
 import { Link } from 'react-router-dom';
 
 const Application = () => {
     const { user } = useContext(AuthContext);
 
-    const { data: applications = {}, isLoading, refetch } = useQuery({
+    const { data: applications = {}, refetch } = useQuery({
         queryKey: [user?.email],
         queryFn: async () => {
             const res = await fetch(`https://school-server-pink.vercel.app/application/${user?.email}`);
@@ -21,10 +20,6 @@ const Application = () => {
     console.log(applications)
 
     refetch();
-
-    if (isLoading) {
-        return <Loading></Loading>
-    }
 
     const { name, photo, email, admissionClass, group, optionalSubject, fatherName, motherName, village, thana, postOffice, district } = applications;
 

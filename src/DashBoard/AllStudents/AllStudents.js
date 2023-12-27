@@ -1,25 +1,15 @@
-import React from 'react';
-import { useQuery } from 'react-query';
-import Loading from '../../Pages/Components/Loading';
+import React, { useContext } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const AllStudents = () => {
-    const { data: students = [], isLoading, refetch } = useQuery({
-        queryKey: ['apply'],
-        queryFn: async () => {
-            const res = await fetch('https://school-server-pink.vercel.app/apply');
-            const data = await res.json();
-            return data;
-        }
-    })
+    const { admissionClass } = useContext(AuthContext);
+    const students = useLoaderData();
 
-    refetch();
-
-    if (isLoading) {
-        return <Loading></Loading>
-    }
     return (
         <div className='w-full'>
 
+            <h1 className='text-xl text-primary mb-5 font-bold text-center'><span className='opacity-70'>Class:</span> {admissionClass}</h1>
 
             <div className="overflow-x-auto no-scrollbar">
                 <table className="table">
@@ -27,7 +17,7 @@ const AllStudents = () => {
                         <tr>
                             <th></th>
                             <th>Name</th>
-                            <th>Id</th>
+                            <th>Group</th>
                             <th>Email</th>
                         </tr>
                     </thead>
@@ -38,8 +28,8 @@ const AllStudents = () => {
                                     student?.confirm &&
                                     <>
                                         <th>{i + 1}.</th>
-                                        <td className='font-bold'>{student?.name}</td>
-                                        <td>{student?._id}</td>
+                                        <td className='font-bold text-xl'>{student?.name}</td>
+                                        <td>{student?.group === 'None' ? '' : student.group}</td>
                                         <td>{student?.email}</td>
                                     </>
                                 }

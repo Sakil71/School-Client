@@ -30,7 +30,7 @@ const AddNotice = () => {
             })
     }
     return (
-        <div className='w-[94%] mx-auto mt-10 border border-primary shadow-xl rounded p-10 bg-indigo-950'>
+        <div className='w-full md:w-[94%] mx-auto mt-10 border border-primary shadow-xl rounded p-10 bg-indigo-950'>
             <h1 className='text-2xl mb-4'>Add Notice</h1>
             <form onSubmit={handleSubmit(handleFormData)} className='flex flex-col gap-4'>
 
@@ -45,7 +45,7 @@ const AddNotice = () => {
                     <option value="nine">Nine</option>
                 </select>
 
-                <textarea className="textarea textarea-primary" type='text' {...register("notice", { required: true })} placeholder="Write a notice"></textarea>
+                <textarea className="textarea textarea-primary w-full" type='text' {...register("notice", { required: true })} placeholder="Write a notice"></textarea>
                 {errors.notice && <span className='text-red-400 font-bold'>Notice is required</span>}
 
 

@@ -38,18 +38,18 @@ const Users = () => {
         }
     }
 
-    const handleDelete = user =>{
+    const handleDelete = user => {
         const agree = window.confirm(`You want to delete - ${user?.name}`);
-        if(agree){
+        if (agree) {
             setLoader(true);
             fetch(`https://school-server-pink.vercel.app/users/${user._id}`, {
-                method : "DELETE"
+                method: "DELETE"
             })
-            .then(res => res.json())
-            .then(data =>{
-                toast.success(`${user.name} - successfully deleted`);
-                setLoader(false);
-            })
+                .then(res => res.json())
+                .then(data => {
+                    toast.success(`${user.name} - successfully deleted`);
+                    setLoader(false);
+                })
         }
     }
     return (
@@ -77,18 +77,11 @@ const Users = () => {
                     <div className='flex items-center gap-4 text-xs'>
                         {
                             user?.role === 'admin' ?
-                            ''
-                            :
-                            <button onClick={() => makeAdmin(user)} title={`${user?.name}`} className='btn btn-sm btn-outline btn-primary'>
-                                {
-                                    loader ?
-                                        <span className="loading loading-spinner loading-md"></span>
-                                        :
-                                        'Make Admin'
-                                }
-                            </button>
+                                ''
+                                :
+                                <button onClick={() => makeAdmin(user)} disabled={loader === true} title={`${user?.name}`} className='btn btn-sm btn-outline btn-primary'>Make Admin</button>
                         }
-                        <button onClick={()=> handleDelete(user)} disabled={loader === true} className='btn btn-sm btn-error'>Delete</button>
+                        <button onClick={() => handleDelete(user)} disabled={loader === true} className='btn btn-sm btn-error'>Delete</button>
                     </div>
                 </div>)
             }

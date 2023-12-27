@@ -17,6 +17,7 @@ const ApplyDetails = () => {
                         </PhotoProvider>
                     </div>
                     <div>
+                        <small className='mb-4 text-primary'>{details?.date}</small>
                         <h1 className='text-4xl font-bold flex items-center gap-5 mb-4'>
                             {details.name}
                             {

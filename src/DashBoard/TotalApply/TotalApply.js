@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const TotalApply = () => {
+
     const { data: applyData = [], isLoading, refetch } = useQuery({
         queryKey: ['apply'],
         queryFn: async () => {
@@ -21,29 +22,28 @@ const TotalApply = () => {
         return <Loading></Loading>
     }
 
-
     const handleDelete = apply => {
         fetch(`https://school-server-pink.vercel.app/apply/${apply?._id}`, {
-            method : "DELETE"
+            method: "DELETE"
         })
-        .then(res => res.json())
-        .then(data =>{
-            if(data.deletedCount > 0){
-                toast.success(`${apply.name} - deleted successful`);
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    toast.success(`${apply.name} - deleted successful`);
+                }
+            })
     }
 
-    const handleConfirm = (apply) =>{
+    const handleConfirm = (apply) => {
         fetch(`https://school-server-pink.vercel.app/apply/confirm/${apply._id}`, {
-            method : 'PATCH'
+            method: 'PATCH'
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.acknowledged){
-                toast.success(`${apply?.name} - applicaton confirmed`);
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success(`${apply?.name} - applicaton confirmed`);
+                }
+            })
     }
 
     return (
@@ -70,7 +70,7 @@ const TotalApply = () => {
                         </div>
 
                         <div>
-                            <button onClick={()=> handleConfirm(apply)} disabled={apply?.confirm} className='btn btn-sm text-xs btn-success mr-4'>Confirm</button>
+                            <button onClick={() => handleConfirm(apply)} disabled={apply?.confirm} className='btn btn-sm text-xs btn-success mr-4'>Confirm</button>
                             <button onClick={() => handleDelete(apply)} disabled={apply?.confirm} className='btn btn-sm text-xs btn-error'>Delete</button>
                         </div>
                     </div>)
